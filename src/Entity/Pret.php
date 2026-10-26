@@ -22,6 +22,10 @@ class Pret
     #[ORM\Column(nullable: true)]
     private ?\DateTime $dateRemboursement = null;
 
+    #[ORM\ManyToOne(inversedBy: 'prets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Membre $membre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +63,18 @@ class Pret
     public function setDateRemboursement(?\DateTime $dateRemboursement): static
     {
         $this->dateRemboursement = $dateRemboursement;
+
+        return $this;
+    }
+
+    public function getMembre(): ?Membre
+    {
+        return $this->membre;
+    }
+
+    public function setMembre(?Membre $membre): static
+    {
+        $this->membre = $membre;
 
         return $this;
     }
