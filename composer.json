@@ -59,6 +59,21 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+                "ndoyesokhnamaimounakabir:db:create": [
+            "@php bin/console doctrine:database:drop --force --if-exists",
+            "@php bin/console doctrine:database:create"
+        ],
+        "ndoyesokhnamaimounakabir:cache:clear": [
+            "@php bin/console cache:clear"
+        ],
+        "ndoyesokhnamaimounakabir:make:entity": [
+            "Composer\\Config::disableProcessTimeout",
+            "App\\Composer\\Scripts::makeEntity"
+        ],
+        "ndoyesokhnamaimounakabir:migration": [
+            "@php bin/console make:migration --no-interaction",
+            "@php bin/console doctrine:migrations:migrate --no-interaction"
         ]
     },
     "conflict": {
@@ -71,6 +86,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^4.3",
         "symfony/maker-bundle": "^1.68"
     }
 }
