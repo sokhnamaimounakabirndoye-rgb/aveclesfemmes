@@ -16,6 +16,10 @@ class Seance
     #[ORM\Column]
     private ?\DateTime $date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'seances')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campagne $campagne = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +33,18 @@ class Seance
     public function setDate(\DateTime $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCampagne(): ?Campagne
+    {
+        return $this->campagne;
+    }
+
+    public function setCampagne(?Campagne $campagne): static
+    {
+        $this->campagne = $campagne;
 
         return $this;
     }
