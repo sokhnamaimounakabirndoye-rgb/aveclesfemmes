@@ -20,6 +20,10 @@ class ModeCotisation
     #[ORM\JoinColumn(nullable: false)]
     private ?Epargne $epargne = null;
 
+    #[ORM\ManyToOne(inversedBy: 'modeCotisations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Membre $membre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class ModeCotisation
     public function setEpargne(?Epargne $epargne): static
     {
         $this->epargne = $epargne;
+
+        return $this;
+    }
+
+    public function getMembre(): ?Membre
+    {
+        return $this->membre;
+    }
+
+    public function setMembre(?Membre $membre): static
+    {
+        $this->membre = $membre;
 
         return $this;
     }
