@@ -69,7 +69,7 @@
         ],
         "ndoyesokhnamaimounakabir:make:entity": [
             "Composer\\Config::disableProcessTimeout",
-            "@php bin/console make:entity"
+            "App\\Composer\\Scripts::makeEntity"
         ],
         "ndoyesokhnamaimounakabir:migration": [
             "@php bin/console make:migration --no-interaction",
