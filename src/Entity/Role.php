@@ -6,6 +6,9 @@ use App\Repository\RoleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap(['membre_simple' => MembreSimple::class])]
 abstract class Role
 {
     #[ORM\Id]
