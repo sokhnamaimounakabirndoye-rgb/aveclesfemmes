@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MembreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
@@ -39,6 +41,17 @@ class Membre
     #[ORM\ManyToOne(inversedBy: 'membres')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Fonction $fonction = null;
+
+    /**
+     * @var Collection<int, Campagne>
+     */
+    #[ORM\ManyToMany(targetEntity: Campagne::class, inversedBy: 'membres')]
+    private Collection $campagne;
+
+    public function __construct()
+    {
+        $this->campagne = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +150,30 @@ class Membre
     public function setFonction(?Fonction $fonction): static
     {
         $this->fonction = $fonction;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Campagne>
+     */
+    public function getCampagne(): Collection
+    {
+        return $this->campagne;
+    }
+
+    public function addCampagne(Campagne $campagne): static
+    {
+        if (!$this->campagne->contains($campagne)) {
+            $this->campagne->add($campagne);
+        }
+
+        return $this;
+    }
+
+    public function removeCampagne(Campagne $campagne): static
+    {
+        $this->campagne->removeElement($campagne);
 
         return $this;
     }
