@@ -28,6 +28,10 @@ class Membre
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+    #[ORM\ManyToOne(inversedBy: 'membres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Groupement $groupement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class Membre
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getGroupement(): ?Groupement
+    {
+        return $this->groupement;
+    }
+
+    public function setGroupement(?Groupement $groupement): static
+    {
+        $this->groupement = $groupement;
 
         return $this;
     }
