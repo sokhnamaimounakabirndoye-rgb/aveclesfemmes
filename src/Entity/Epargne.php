@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EpargneRepository::class)]
-class Epargne extends Campagne
+abstract class Epargne extends Campagne
 {
     /**
      * @var Collection<int, ModeCotisation>

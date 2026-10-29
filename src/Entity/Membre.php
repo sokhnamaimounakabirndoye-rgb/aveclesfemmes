@@ -31,7 +31,7 @@ class Membre
     private ?string $password = null;
 
     #[ORM\ManyToOne(inversedBy: 'membres')]
-    #[ORM\JoinColumn(nullable: false)]
+    
     private ?Groupement $groupement = null;
 
     #[ORM\ManyToOne(inversedBy: 'membres')]
@@ -39,7 +39,7 @@ class Membre
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'membres')]
-    #[ORM\JoinColumn(nullable: false)]
+    
     private ?Fonction $fonction = null;
 
     /**

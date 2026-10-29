@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CampagneRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
-#[ORM\DiscriminatorMap(['tontine' => Tontine::class, 'epargne' => Epargne::class])]
+#[ORM\DiscriminatorMap(['tontine' => Tontine::class, 'epargne_calebasse' => EpargneCalebasse::class, 'epargne_duree_precise' => EpargneDureePrecise::class])]
 abstract class Campagne
 {
     #[ORM\Id]
@@ -51,6 +51,30 @@ abstract class Campagne
      */
     #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'campagne')]
     private Collection $seances;
+
+    #[ORM\Column]
+    private ?int $delaiCotisation = null;
+
+    #[ORM\Column]
+    private ?float $montantDer = null;
+
+    #[ORM\Column]
+    private ?float $majorationDer = null;
+
+    #[ORM\Column]
+    private ?float $amendeJournaliere = null;
+
+    #[ORM\ManyToOne(inversedBy: 'campagnes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Exercice $exercice = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Periodicite $periodiciteCotisation = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Periodicite $periodiciteRencontre = null;
 
     public function __construct()
     {
@@ -200,6 +224,90 @@ abstract class Campagne
                 $seance->setCampagne(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDelaiCotisation(): ?int
+    {
+        return $this->delaiCotisation;
+    }
+
+    public function setDelaiCotisation(int $delaiCotisation): static
+    {
+        $this->delaiCotisation = $delaiCotisation;
+
+        return $this;
+    }
+
+    public function getMontantDer(): ?float
+    {
+        return $this->montantDer;
+    }
+
+    public function setMontantDer(float $montantDer): static
+    {
+        $this->montantDer = $montantDer;
+
+        return $this;
+    }
+
+    public function getMajorationDer(): ?float
+    {
+        return $this->majorationDer;
+    }
+
+    public function setMajorationDer(float $majorationDer): static
+    {
+        $this->majorationDer = $majorationDer;
+
+        return $this;
+    }
+
+    public function getAmendeJournaliere(): ?float
+    {
+        return $this->amendeJournaliere;
+    }
+
+    public function setAmendeJournaliere(float $amendeJournaliere): static
+    {
+        $this->amendeJournaliere = $amendeJournaliere;
+
+        return $this;
+    }
+
+    public function getExercice(): ?Exercice
+    {
+        return $this->exercice;
+    }
+
+    public function setExercice(?Exercice $exercice): static
+    {
+        $this->exercice = $exercice;
+
+        return $this;
+    }
+
+    public function getPeriodiciteCotisation(): ?Periodicite
+    {
+        return $this->periodiciteCotisation;
+    }
+
+    public function setPeriodiciteCotisation(?Periodicite $periodiciteCotisation): static
+    {
+        $this->periodiciteCotisation = $periodiciteCotisation;
+
+        return $this;
+    }
+
+    public function getPeriodiciteRencontre(): ?Periodicite
+    {
+        return $this->periodiciteRencontre;
+    }
+
+    public function setPeriodiciteRencontre(?Periodicite $periodiciteRencontre): static
+    {
+        $this->periodiciteRencontre = $periodiciteRencontre;
 
         return $this;
     }
