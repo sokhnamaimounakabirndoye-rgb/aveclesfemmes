@@ -41,7 +41,7 @@ class Groupement
     /**
      * @var Collection<int, Exercice>
      */
-    #[ORM\OneToMany(targetEntity: Exercice::class, mappedBy: 'groupement')]
+    #[ORM\OneToMany(targetEntity: Exercice::class, mappedBy: 'groupement', orphanRemoval: true)]
     private Collection $exercices;
 
     public function __construct()
