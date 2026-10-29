@@ -54,10 +54,10 @@ abstract class Campagne
     private ?int $delaiCotisation = null;
 
     #[ORM\Column]
-    private ?float $montantDer = null;
+    private ?float $caissePresent = null;
 
     #[ORM\Column]
-    private ?float $majorationDer = null;
+    private ?float $caisseAbsent = null;
 
     #[ORM\Column]
     private ?float $amendeJournaliere = null;
@@ -217,26 +217,26 @@ abstract class Campagne
         return $this;
     }
 
-    public function getMontantDer(): ?float
+    public function getCaissePresent(): ?float
     {
-        return $this->montantDer;
+        return $this->caissePresent;
     }
 
-    public function setMontantDer(float $montantDer): static
+    public function setCaissePresent(float $caissePresent): static
     {
-        $this->montantDer = $montantDer;
+        $this->caissePresent = $caissePresent;
 
         return $this;
     }
 
-    public function getMajorationDer(): ?float
+    public function getCaisseAbsent(): ?float
     {
-        return $this->majorationDer;
+        return $this->caisseAbsent;
     }
 
-    public function setMajorationDer(float $majorationDer): static
+    public function setCaisseAbsent(float $caisseAbsent): static
     {
-        $this->majorationDer = $majorationDer;
+        $this->caisseAbsent = $caisseAbsent;
 
         return $this;
     }
