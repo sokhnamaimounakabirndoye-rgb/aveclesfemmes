@@ -52,6 +52,18 @@ abstract class Campagne
     #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'campagne')]
     private Collection $seances;
 
+    #[ORM\Column]
+    private ?int $delaiCotisation = null;
+
+    #[ORM\Column]
+    private ?float $montantDer = null;
+
+    #[ORM\Column]
+    private ?float $majorationDer = null;
+
+    #[ORM\Column]
+    private ?float $amendeJournaliere = null;
+
     public function __construct()
     {
         $this->membres = new ArrayCollection();
@@ -200,6 +212,54 @@ abstract class Campagne
                 $seance->setCampagne(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDelaiCotisation(): ?int
+    {
+        return $this->delaiCotisation;
+    }
+
+    public function setDelaiCotisation(int $delaiCotisation): static
+    {
+        $this->delaiCotisation = $delaiCotisation;
+
+        return $this;
+    }
+
+    public function getMontantDer(): ?float
+    {
+        return $this->montantDer;
+    }
+
+    public function setMontantDer(float $montantDer): static
+    {
+        $this->montantDer = $montantDer;
+
+        return $this;
+    }
+
+    public function getMajorationDer(): ?float
+    {
+        return $this->majorationDer;
+    }
+
+    public function setMajorationDer(float $majorationDer): static
+    {
+        $this->majorationDer = $majorationDer;
+
+        return $this;
+    }
+
+    public function getAmendeJournaliere(): ?float
+    {
+        return $this->amendeJournaliere;
+    }
+
+    public function setAmendeJournaliere(float $amendeJournaliere): static
+    {
+        $this->amendeJournaliere = $amendeJournaliere;
 
         return $this;
     }
