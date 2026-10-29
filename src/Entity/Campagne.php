@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CampagneRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
-#[ORM\DiscriminatorMap(['tontine' => Tontine::class, 'epargne_calebasse' => EpargneCalebasse::class])]
+#[ORM\DiscriminatorMap(['tontine' => Tontine::class, 'epargne_calebasse' => EpargneCalebasse::class, 'epargne_duree_precise' => EpargneDureePrecise::class])]
 abstract class Campagne
 {
     #[ORM\Id]
