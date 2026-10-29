@@ -29,6 +29,12 @@ class Cotisation
     #[ORM\JoinColumn(nullable: false)]
     private ?Seance $seance = null;
 
+    #[ORM\Column]
+    private ?float $montantCaisse = null;
+
+    #[ORM\Column]
+    private ?float $montantAmende = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,6 +84,30 @@ class Cotisation
     public function setSeance(?Seance $seance): static
     {
         $this->seance = $seance;
+
+        return $this;
+    }
+
+    public function getMontantCaisse(): ?float
+    {
+        return $this->montantCaisse;
+    }
+
+    public function setMontantCaisse(float $montantCaisse): static
+    {
+        $this->montantCaisse = $montantCaisse;
+
+        return $this;
+    }
+
+    public function getMontantAmende(): ?float
+    {
+        return $this->montantAmende;
+    }
+
+    public function setMontantAmende(float $montantAmende): static
+    {
+        $this->montantAmende = $montantAmende;
 
         return $this;
     }
