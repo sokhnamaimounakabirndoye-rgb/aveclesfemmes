@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use App\Trait\DateTimeTrait;
 use App\Repository\MembreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Membre
-{
+{   use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
