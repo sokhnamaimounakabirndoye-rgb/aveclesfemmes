@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Trait\DateTimeTrait;
 use App\Repository\CampagneRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,8 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
 #[ORM\DiscriminatorMap(['tontine' => Tontine::class, 'epargne_calebasse' => EpargneCalebasse::class, 'epargne_duree_precise' => EpargneDureePrecise::class])]
+#[ORM\HasLifecycleCallbacks]
 abstract class Campagne
-{
+{   use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -30,11 +32,7 @@ abstract class Campagne
     #[ORM\Column]
     private ?float $montant = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updateAt = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'campagnes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -56,10 +54,10 @@ abstract class Campagne
     private ?int $delaiCotisation = null;
 
     #[ORM\Column]
-    private ?float $montantDer = null;
+    private ?float $caissePresent = null;
 
     #[ORM\Column]
-    private ?float $majorationDer = null;
+    private ?float $caisseAbsent = null;
 
     #[ORM\Column]
     private ?float $amendeJournaliere = null;
@@ -135,29 +133,8 @@ abstract class Campagne
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
+    
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdateAt(): ?\DateTimeImmutable
-    {
-        return $this->updateAt;
-    }
-
-    public function setUpdateAt(?\DateTimeImmutable $updateAt): static
-    {
-        $this->updateAt = $updateAt;
-
-        return $this;
-    }
 
     public function getGroupement(): ?Groupement
     {
@@ -240,26 +217,26 @@ abstract class Campagne
         return $this;
     }
 
-    public function getMontantDer(): ?float
+    public function getCaissePresent(): ?float
     {
-        return $this->montantDer;
+        return $this->caissePresent;
     }
 
-    public function setMontantDer(float $montantDer): static
+    public function setCaissePresent(float $caissePresent): static
     {
-        $this->montantDer = $montantDer;
+        $this->caissePresent = $caissePresent;
 
         return $this;
     }
 
-    public function getMajorationDer(): ?float
+    public function getCaisseAbsent(): ?float
     {
-        return $this->majorationDer;
+        return $this->caisseAbsent;
     }
 
-    public function setMajorationDer(float $majorationDer): static
+    public function setCaisseAbsent(float $caisseAbsent): static
     {
-        $this->majorationDer = $majorationDer;
+        $this->caisseAbsent = $caisseAbsent;
 
         return $this;
     }
