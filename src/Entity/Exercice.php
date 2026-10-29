@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Trait\DateTimeTrait;
 use App\Repository\ExerciceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Enum\StatutExercice;
 
 #[ORM\Entity(repositoryClass: ExerciceRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Exercice
-{
+{   use DateTimeTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
