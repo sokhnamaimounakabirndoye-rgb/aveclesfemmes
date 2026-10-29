@@ -23,7 +23,7 @@ php bin/console doctrine:fixtures:load --no-interaction
 | 3 | `CampagneFixtures` | Groupement, Exercice, Periodicite, Membre | Une campagne appartient à un groupement et à un exercice, a deux périodicités, et reçoit ses participants |
 | 4 | `ModeCotisationFixtures` | Campagne, Membre | Le mode de cotisation lie un membre à une épargne |
 | 4 | `SeanceFixtures` | Campagne | Une séance appartient à une campagne |
-| 5 | `CotisationFixtures` | Seance, Membre | Une cotisation est versée par un membre pendant une séance |
+| 5 | `CotisationFixtures` | Campagne, Seance, Membre | Une cotisation est versée par un membre pendant une séance ; ses montants de caisse sociale et d'amende viennent de la campagne |
 | 5 | `PretFixtures` | Membre, Exercice | Un prêt est demandé par un membre pendant un exercice |
 
 ## Règles de cohérence respectées par les données
@@ -34,3 +34,5 @@ php bin/console doctrine:fixtures:load --no-interaction
 - L'épargne calebasse couvre toute la durée de l'exercice, avec tous les membres.
 - L'épargne à durée précise a une participation optionnelle (deux membres sur quatre).
 - Un membre n'a jamais deux prêts non remboursés en même temps.
+- Les dates `createdAt` et `updatedAt` ne sont pas renseignées dans les fixtures : elles sont posées automatiquement par le trait `DateTimeTrait` (callbacks `PrePersist` et `PreUpdate`).
+- Pour une séance, trois cas de cotisation sont représentés : membre présente (épargne + caisse présente), absente avec cotisation envoyée (épargne + caisse absente), absente sans cotisation (épargne payée plus tard + amende journalière cumulée).
