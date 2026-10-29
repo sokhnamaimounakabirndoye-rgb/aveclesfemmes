@@ -64,6 +64,18 @@ abstract class Campagne
     #[ORM\Column]
     private ?float $amendeJournaliere = null;
 
+    #[ORM\ManyToOne(inversedBy: 'campagnes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Exercice $exercice = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Periodicite $periodiciteCotisation = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Periodicite $periodiciteRencontre = null;
+
     public function __construct()
     {
         $this->membres = new ArrayCollection();
@@ -260,6 +272,42 @@ abstract class Campagne
     public function setAmendeJournaliere(float $amendeJournaliere): static
     {
         $this->amendeJournaliere = $amendeJournaliere;
+
+        return $this;
+    }
+
+    public function getExercice(): ?Exercice
+    {
+        return $this->exercice;
+    }
+
+    public function setExercice(?Exercice $exercice): static
+    {
+        $this->exercice = $exercice;
+
+        return $this;
+    }
+
+    public function getPeriodiciteCotisation(): ?Periodicite
+    {
+        return $this->periodiciteCotisation;
+    }
+
+    public function setPeriodiciteCotisation(?Periodicite $periodiciteCotisation): static
+    {
+        $this->periodiciteCotisation = $periodiciteCotisation;
+
+        return $this;
+    }
+
+    public function getPeriodiciteRencontre(): ?Periodicite
+    {
+        return $this->periodiciteRencontre;
+    }
+
+    public function setPeriodiciteRencontre(?Periodicite $periodiciteRencontre): static
+    {
+        $this->periodiciteRencontre = $periodiciteRencontre;
 
         return $this;
     }
